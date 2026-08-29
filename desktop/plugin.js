@@ -655,7 +655,7 @@ function TrackerPane({ rest }) {
     children: [
       jsx('div', { style: { color: 'var(--ui-text-secondary)', fontWeight: '600', marginBottom: '5px' }, children: liveName ? `Mixture of Agents · ${liveName}` : 'Mixture of Agents' }),
       jsx('div', { style: { color: 'var(--ui-text-tertiary)', fontSize: '12px', marginBottom: '10px' }, children: `refs completed ${run.refsDone}/${run.refsTotal}` }),
-      rows.length ? jsx('div', { children: rows }) : jsx('div', { style: { color: 'var(--ui-text-quaternary)', padding: '7px 0' }, children: 'No advisor references yet.' }),
+      rows.length ? jsx('div', { children: rows }) : jsx('div', { style: { color: 'var(--ui-text-quaternary)', padding: '7px 0' }, children: 'No agent references yet.' }),
       jsx(AggregatorRow, { run }),
       liveTotals ? jsx('div', { style: { color: 'var(--ui-text-quaternary)', fontSize: '12px', padding: '3px 0' }, children: liveTotals }) : null,
       metricsPanel,

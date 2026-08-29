@@ -691,6 +691,24 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.ok(textContent(idlePane).includes('Waiting for MoA activity in this session.'))
 
   trackerState.set({
+    focusedId: 'empty-live',
+    previousRing: [],
+    runsBySession: {
+      'empty-live': {
+        ...emptyRun('empty-live'),
+        open: true,
+        refsDone: 0,
+        refsTotal: 1,
+        advisors: [],
+        aggregator: '',
+        aggregatorState: 'waiting'
+      }
+    }
+  })
+  const emptyLivePaneText = textContent(TrackerPane({ rest: queryRest }))
+  assert.ok(emptyLivePaneText.includes('No agent references yet.'), 'Live empty board labels pending agent references')
+
+  trackerState.set({
     focusedId: 'sticky-moa',
     previousRing: [{
       sessionId: 'sticky-moa',

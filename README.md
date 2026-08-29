@@ -1,6 +1,6 @@
 # MoA Tracker
 
-MoA Tracker is a **Hermes Agent** Desktop plugin that shows a live, in-memory board for Mixture-of-Agents (MoA) runs: labelled agent and aggregator rows, status (waiting / running / aggregating / done / failed / interrupted), a focused-session status chip, leftover sticky chrome with in/out when `/history` has a matching `turn_id`, and Previous MoA boards fed from sanitized metrics. The live board is driven by session events and does not require a backend; an optional Python metrics hook adds `/current` and `/history` (until that hook is loaded, the UI shows **metrics backend off**). The plugin does not persist advisor content or request snapshots, does not change gateway or core configuration, and is not an official Nous Research product.
+MoA Tracker is a **Hermes Agent** Desktop plugin that shows a live, in-memory board for Mixture-of-Agents (MoA) runs: labelled agent and aggregator rows, status (waiting / running / aggregating / done / failed / interrupted), a focused-session status chip, leftover sticky chrome with in/out when `/history` has a matching `turn_id`, and Previous MoA boards fed from sanitized metrics. The live board is driven by session events and does not require a backend; an optional Python metrics hook adds `/current` and `/history` (until that hook is loaded, the UI shows **metrics backend off**). The plugin does not persist agent content or request snapshots, does not change gateway or core configuration, and is not an official Nous Research product.
 
 ## Install
 
