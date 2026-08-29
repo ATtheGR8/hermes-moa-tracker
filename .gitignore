@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.hypothesis/
+.venv/
+.DS_Store
+runs.jsonl
+*.egg-info/
+.coverage
+htmlcov/
+._*
+*.tar

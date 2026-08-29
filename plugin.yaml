@@ -1,0 +1,4 @@
+name: moa-tracker
+version: 1.0.0
+description: Live MoA run board plus sanitized advisor metrics.
+hooks: [post_api_request]
