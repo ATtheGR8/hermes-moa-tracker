@@ -11,7 +11,7 @@ assert.ok(!source.includes('function HistorySection'), 'HistorySection must rema
 const executable = source
   .replace(/^import .*\n/gm, '')
   .replace(/\nexport default[\s\S]*$/, '\n')
-  .concat('\nthis.__helpers = { emptyRun: typeof emptyRun === \'undefined\' ? undefined : emptyRun, runWasMoA: typeof runWasMoA === \'undefined\' ? undefined : runWasMoA, snapshotRun: typeof snapshotRun === \'undefined\' ? undefined : snapshotRun, padWaiting, metricsCurrentPath, metricsHistoryPath, metricsBackendLabel: typeof metricsBackendLabel === \'undefined\' ? undefined : metricsBackendLabel, formatTokenCount: typeof formatTokenCount === \'undefined\' ? undefined : formatTokenCount, formatCost: typeof formatCost === \'undefined\' ? undefined : formatCost, sumRunUsage: typeof sumRunUsage === \'undefined\' ? undefined : sumRunUsage, formatRunTotals: typeof formatRunTotals === \'undefined\' ? undefined : formatRunTotals, formatRefRow: typeof formatRefRow === \'undefined\' ? undefined : formatRefRow, refHasActivity: typeof refHasActivity === \'undefined\' ? undefined : refHasActivity, runHasActivity: typeof runHasActivity === \'undefined\' ? undefined : runHasActivity, latestRun: typeof latestRun === \'undefined\' ? undefined : latestRun, latestRunWithTokenUsage: typeof latestRunWithTokenUsage === \'undefined\' ? undefined : latestRunWithTokenUsage, liveMetricsForBoard: typeof liveMetricsForBoard === \'undefined\' ? undefined : liveMetricsForBoard, latestHistoryRunWithTokenUsage: typeof latestHistoryRunWithTokenUsage === \'undefined\' ? undefined : latestHistoryRunWithTokenUsage, historyRuns: typeof historyRuns === \'undefined\' ? undefined : historyRuns, historySectionRuns: typeof historySectionRuns === \'undefined\' ? undefined : historySectionRuns, metricsActivityLines: typeof metricsActivityLines === \'undefined\' ? undefined : metricsActivityLines, fetchMetrics: typeof fetchMetrics === \'undefined\' ? undefined : fetchMetrics, displayModelLabel: typeof displayModelLabel === \'undefined\' ? undefined : displayModelLabel, displayMoaName: typeof displayMoaName === \'undefined\' ? undefined : displayMoaName, previousRunUsage: typeof previousRunUsage === \'undefined\' ? undefined : previousRunUsage, previousRingUsage: typeof previousRingUsage === \'undefined\' ? undefined : previousRingUsage, previousRows: typeof previousRows === \'undefined\' ? undefined : previousRows, pushPreviousRing: typeof pushPreviousRing === \'undefined\' ? undefined : pushPreviousRing, AdvisorRow: typeof AdvisorRow === \'undefined\' ? undefined : AdvisorRow, AggregatorRow: typeof AggregatorRow === \'undefined\' ? undefined : AggregatorRow, PreviousRuns: typeof PreviousRuns === \'undefined\' ? undefined : PreviousRuns, TrackerPane: typeof TrackerPane === \'undefined\' ? undefined : TrackerPane, promoteFirstWaiting, setAdvisorStatus, applyProgress: typeof applyProgress === \'undefined\' ? undefined : applyProgress, applyTurnBoundary: typeof applyTurnBoundary === \'undefined\' ? undefined : applyTurnBoundary, applyComplete: typeof applyComplete === \'undefined\' ? undefined : applyComplete, selectedRun: typeof selectedRun === \'undefined\' ? undefined : selectedRun, liveBoardRun: typeof liveBoardRun === \'undefined\' ? undefined : liveBoardRun, statusClassName: typeof statusClassName === \'undefined\' ? undefined : statusClassName, onReference, onPhase, onAggregating, onMessageStart, trackerState, tooltipLabel, chipCaption, chipTip };\n')
+  .concat('\nthis.__helpers = { emptyRun: typeof emptyRun === \'undefined\' ? undefined : emptyRun, runWasMoA: typeof runWasMoA === \'undefined\' ? undefined : runWasMoA, snapshotRun: typeof snapshotRun === \'undefined\' ? undefined : snapshotRun, padWaiting, metricsCurrentPath, metricsHistoryPath, metricsBackendLabel: typeof metricsBackendLabel === \'undefined\' ? undefined : metricsBackendLabel, formatTokenCount: typeof formatTokenCount === \'undefined\' ? undefined : formatTokenCount, formatCost: typeof formatCost === \'undefined\' ? undefined : formatCost, sumRunUsage: typeof sumRunUsage === \'undefined\' ? undefined : sumRunUsage, formatRunTotals: typeof formatRunTotals === \'undefined\' ? undefined : formatRunTotals, formatRefRow: typeof formatRefRow === \'undefined\' ? undefined : formatRefRow, refHasActivity: typeof refHasActivity === \'undefined\' ? undefined : refHasActivity, runHasActivity: typeof runHasActivity === \'undefined\' ? undefined : runHasActivity, latestRun: typeof latestRun === \'undefined\' ? undefined : latestRun, latestRunWithTokenUsage: typeof latestRunWithTokenUsage === \'undefined\' ? undefined : latestRunWithTokenUsage, liveMetricsForBoard: typeof liveMetricsForBoard === \'undefined\' ? undefined : liveMetricsForBoard, latestHistoryRunWithTokenUsage: typeof latestHistoryRunWithTokenUsage === \'undefined\' ? undefined : latestHistoryRunWithTokenUsage, historyRuns: typeof historyRuns === \'undefined\' ? undefined : historyRuns, historySectionRuns: typeof historySectionRuns === \'undefined\' ? undefined : historySectionRuns, metricsActivityLines: typeof metricsActivityLines === \'undefined\' ? undefined : metricsActivityLines, fetchMetrics: typeof fetchMetrics === \'undefined\' ? undefined : fetchMetrics, displayModelLabel: typeof displayModelLabel === \'undefined\' ? undefined : displayModelLabel, displayMoaName: typeof displayMoaName === \'undefined\' ? undefined : displayMoaName, previousRunUsage: typeof previousRunUsage === \'undefined\' ? undefined : previousRunUsage, previousRingUsage: typeof previousRingUsage === \'undefined\' ? undefined : previousRingUsage, previousRows: typeof previousRows === \'undefined\' ? undefined : previousRows, pushPreviousRing: typeof pushPreviousRing === \'undefined\' ? undefined : pushPreviousRing, AgentRow: typeof AgentRow === \'undefined\' ? undefined : AgentRow, AggregatorRow: typeof AggregatorRow === \'undefined\' ? undefined : AggregatorRow, PreviousRuns: typeof PreviousRuns === \'undefined\' ? undefined : PreviousRuns, TrackerPane: typeof TrackerPane === \'undefined\' ? undefined : TrackerPane, promoteFirstWaiting, setAgentStatus, applyProgress: typeof applyProgress === \'undefined\' ? undefined : applyProgress, applyTurnBoundary: typeof applyTurnBoundary === \'undefined\' ? undefined : applyTurnBoundary, applyComplete: typeof applyComplete === \'undefined\' ? undefined : applyComplete, selectedRun: typeof selectedRun === \'undefined\' ? undefined : selectedRun, liveBoardRun: typeof liveBoardRun === \'undefined\' ? undefined : liveBoardRun, statusClassName: typeof statusClassName === \'undefined\' ? undefined : statusClassName, onReference, onPhase, onAggregating, onMessageStart, trackerState, tooltipLabel, chipCaption, chipTip };\n')
 const sandbox = {
   atom: (initial) => {
     let value = initial
@@ -32,7 +32,7 @@ const sandbox = {
   jsxs: (type, props) => ({ type, props })
 }
 vm.runInNewContext(executable, sandbox, { filename: pluginPath })
-const { emptyRun, runWasMoA, snapshotRun, padWaiting, promoteFirstWaiting, setAdvisorStatus, applyProgress, applyTurnBoundary, applyComplete, selectedRun, liveBoardRun, statusClassName, onReference, onPhase, onAggregating, onMessageStart, trackerState, tooltipLabel, chipCaption, chipTip, metricsCurrentPath, metricsHistoryPath, metricsBackendLabel, formatTokenCount, formatCost, sumRunUsage, formatRunTotals, formatRefRow, refHasActivity, runHasActivity, latestRun, latestRunWithTokenUsage, latestHistoryRunWithTokenUsage, liveMetricsForBoard, historyRuns, historySectionRuns, metricsActivityLines, fetchMetrics, displayModelLabel, displayMoaName, previousRunUsage, previousRingUsage, previousRows, pushPreviousRing, AdvisorRow, AggregatorRow, PreviousRuns, TrackerPane } = sandbox.__helpers
+const { emptyRun, runWasMoA, snapshotRun, padWaiting, promoteFirstWaiting, setAgentStatus, applyProgress, applyTurnBoundary, applyComplete, selectedRun, liveBoardRun, statusClassName, onReference, onPhase, onAggregating, onMessageStart, trackerState, tooltipLabel, chipCaption, chipTip, metricsCurrentPath, metricsHistoryPath, metricsBackendLabel, formatTokenCount, formatCost, sumRunUsage, formatRunTotals, formatRefRow, refHasActivity, runHasActivity, latestRun, latestRunWithTokenUsage, latestHistoryRunWithTokenUsage, liveMetricsForBoard, historyRuns, historySectionRuns, metricsActivityLines, fetchMetrics, displayModelLabel, displayMoaName, previousRunUsage, previousRingUsage, previousRows, pushPreviousRing, AgentRow, AggregatorRow, PreviousRuns, TrackerPane } = sandbox.__helpers
 const plain = (value) => JSON.parse(JSON.stringify(value))
 const textContent = (node) => {
   if (typeof node === 'string') return [node]
@@ -163,7 +163,7 @@ const textContent = (node) => {
     sessionId,
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: `${sessionId}:advisor`, status: 'done' }],
+    agents: [{ label: `${sessionId}:advisor`, status: 'done' }],
     aggregator: `${sessionId}:aggregator`,
     aggregatorState: 'done',
     references: [{ usage: { input_tokens: inputTokens, output_tokens: 0 } }]
@@ -250,18 +250,18 @@ const offMetrics = { status: 'off', current: null, history: [] }
 }
 
 {
-  const advisors = [
+  const agents = [
     { label: 'Alpha', status: 'done' },
     { label: '', status: 'waiting' },
     { label: 'Gamma', status: 'waiting' }
   ]
-  const next = promoteFirstWaiting(advisors, 1, 3)
+  const next = promoteFirstWaiting(agents, 1, 3)
   assert.deepEqual(plain(next), [
     { label: 'Alpha', status: 'done' },
     { label: '', status: 'running' },
     { label: 'Gamma', status: 'waiting' }
   ])
-  assert.deepEqual(advisors, [
+  assert.deepEqual(agents, [
     { label: 'Alpha', status: 'done' },
     { label: '', status: 'waiting' },
     { label: 'Gamma', status: 'waiting' }
@@ -269,28 +269,28 @@ const offMetrics = { status: 'off', current: null, history: [] }
 }
 
 {
-  const advisors = [{ label: 'Alpha', status: 'done' }, { label: '', status: 'waiting' }]
-  assert.deepEqual(plain(promoteFirstWaiting(advisors, 2, 2)), advisors)
+  const agents = [{ label: 'Alpha', status: 'done' }, { label: '', status: 'waiting' }]
+  assert.deepEqual(plain(promoteFirstWaiting(agents, 2, 2)), agents)
 }
 
 {
-  const advisors = [
+  const agents = [
     { label: 'Alpha', status: 'done' },
     { label: '', status: 'running' }
   ]
-  assert.deepEqual(plain(setAdvisorStatus(advisors, 'Beta', 'done')), [
+  assert.deepEqual(plain(setAgentStatus(agents, 'Beta', 'done')), [
     { label: 'Alpha', status: 'done' },
     { label: 'Beta', status: 'done' }
   ])
-  assert.equal(setAdvisorStatus(advisors, 'Beta', 'done').length, 2)
+  assert.equal(setAgentStatus(agents, 'Beta', 'done').length, 2)
 }
 
 {
-  const advisors = [
+  const agents = [
     { label: 'Alpha', status: 'done' },
     { label: 'Beta', status: 'done' }
   ]
-  assert.deepEqual(plain(setAdvisorStatus(advisors, 'Gamma', 'done')), advisors)
+  assert.deepEqual(plain(setAgentStatus(agents, 'Gamma', 'done')), agents)
 }
 
 {
@@ -302,7 +302,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         sessionId: 'session-1',
         refsDone: 1,
         refsTotal: 2,
-        advisors: [
+        agents: [
           { label: 'Alpha', status: 'done' },
           { label: '', status: 'waiting' }
         ],
@@ -315,7 +315,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     session_id: 'session-1',
     payload: { text: '[failed: unavailable]', count: 2, index: 2 }
   })
-  assert.equal(trackerState.get().runsBySession['session-1'].advisors.length, 2)
+  assert.equal(trackerState.get().runsBySession['session-1'].agents.length, 2)
 }
 
 {
@@ -324,17 +324,17 @@ const offMetrics = { status: 'off', current: null, history: [] }
     open: false,
     refsDone: 0,
     refsTotal: 0,
-    advisors: [],
+    agents: [],
     aggregator: '',
     aggregatorState: 'waiting'
   }
   const afterAlpha = applyProgress(initial, { refs_total: 2, refs_done: 1, label: 'Alpha' })
   const afterBeta = applyProgress(afterAlpha, { refs_total: 2, refs_done: 2, label: 'Beta' })
-  assert.deepEqual(plain(afterBeta.advisors), [
+  assert.deepEqual(plain(afterBeta.agents), [
     { label: 'Alpha', status: 'done' },
     { label: 'Beta', status: 'done' }
   ])
-  assert.equal(afterBeta.advisors.length, 2)
+  assert.equal(afterBeta.agents.length, 2)
 }
 
 {
@@ -343,14 +343,14 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-1',
     refsDone: 0,
     refsTotal: 0,
-    advisors: [],
+    agents: [],
     aggregator: '',
     aggregatorState: 'waiting'
   }
   const capped = applyProgress(initial, { refs_total: 33, refs_done: 33, label: 'Alpha' })
   assert.equal(capped.refsTotal, 32)
   assert.equal(capped.refsDone, 32)
-  assert.equal(capped.advisors.length, 32)
+  assert.equal(capped.agents.length, 32)
   assert.equal(padWaiting(Array.from({ length: 40 }, () => ({ label: '', status: 'waiting' })), 40).length, 32)
 }
 
@@ -360,14 +360,14 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-1',
     refsDone: 0,
     refsTotal: 0,
-    advisors: [],
+    agents: [],
     aggregator: '',
     aggregatorState: 'waiting'
   }
   const invalid = applyProgress(initial, { refs_total: -1, refs_done: Number.NaN, label: 'Alpha' })
   assert.equal(invalid.refsTotal, 0)
   assert.equal(invalid.refsDone, 0)
-  assert.equal(invalid.advisors.length, 0)
+  assert.equal(invalid.agents.length, 0)
 }
 
 {
@@ -377,7 +377,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-1',
     refsDone: 2,
     refsTotal: 2,
-    advisors: [
+    agents: [
       { label: 'Old Alpha', status: 'done' },
       { label: 'Old Beta', status: 'done' }
     ],
@@ -387,7 +387,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   const newRun = applyTurnBoundary(previous)
   const afterNewFirst = applyProgress(newRun, { refs_total: 2, refs_done: 1, label: 'New Alpha' })
   const afterNewSecond = applyProgress(afterNewFirst, { refs_total: 2, refs_done: 2, label: 'New Beta' })
-  assert.deepEqual(plain(afterNewSecond.advisors), [
+  assert.deepEqual(plain(afterNewSecond.agents), [
     { label: 'New Alpha', status: 'done' },
     { label: 'New Beta', status: 'done' }
   ])
@@ -400,13 +400,13 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-archive',
     refsDone: 2,
     refsTotal: 2,
-    advisors: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'done' }],
+    agents: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'done' }],
     aggregator: 'Synthesizer',
     aggregatorState: 'done'
   }
   const next = applyTurnBoundary(liveRun)
   assert.deepEqual(plain(next.previous), [{
-    advisors: liveRun.advisors,
+    agents: liveRun.agents,
     aggregator: 'Synthesizer',
     aggregatorState: 'done',
     refsDone: 2,
@@ -416,19 +416,19 @@ const offMetrics = { status: 'off', current: null, history: [] }
 }
 
 {
-  const archived = [{ advisors: [], aggregator: 'earlier', aggregatorState: 'done', refsDone: 1, refsTotal: 1 }]
+  const archived = [{ agents: [], aggregator: 'earlier', aggregatorState: 'done', refsDone: 1, refsTotal: 1 }]
   assert.equal(emptyRun('session-empty', archived).previous, archived)
-  assert.equal(runWasMoA({ open: true, advisors: [], refsDone: 0, refsTotal: 0, aggregator: '' }), false)
-  assert.equal(runWasMoA({ open: true, advisors: [], refsDone: 0, refsTotal: 1, aggregator: '' }), true)
+  assert.equal(runWasMoA({ open: true, agents: [], refsDone: 0, refsTotal: 0, aggregator: '' }), false)
+  assert.equal(runWasMoA({ open: true, agents: [], refsDone: 0, refsTotal: 1, aggregator: '' }), true)
   assert.deepEqual(plain(applyTurnBoundary(emptyRun('session-empty', archived)).previous), archived)
 
-  const priorTen = Array.from({ length: 10 }, (_, index) => ({ advisors: [], aggregator: `old-${index}`, aggregatorState: 'done', refsDone: index, refsTotal: index }))
+  const priorTen = Array.from({ length: 10 }, (_, index) => ({ agents: [], aggregator: `old-${index}`, aggregatorState: 'done', refsDone: index, refsTotal: index }))
   const bounded = applyTurnBoundary({
     open: true,
     sessionId: 'session-cap',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Newest', status: 'done' }],
+    agents: [{ label: 'Newest', status: 'done' }],
     aggregator: 'newest',
     aggregatorState: 'done',
     previous: priorTen
@@ -442,7 +442,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-fanout',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Old', status: 'done' }],
+    agents: [{ label: 'Old', status: 'done' }],
     aggregator: '',
     aggregatorState: 'waiting',
     previous: archived
@@ -456,7 +456,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-1',
     refsDone: 2,
     refsTotal: 2,
-    advisors: [
+    agents: [
       { label: 'Old Alpha', status: 'done' },
       { label: 'Old Beta', status: 'done' }
     ],
@@ -464,7 +464,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     aggregatorState: 'done'
   }
   const replacement = applyProgress(oldRun, { refs_total: 2, refs_done: 1, label: 'New Alpha' })
-  assert.deepEqual(plain(replacement.advisors), [
+  assert.deepEqual(plain(replacement.agents), [
     { label: 'New Alpha', status: 'done' },
     { label: '', status: 'running' }
   ])
@@ -478,7 +478,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     open: true,
     refsDone: 1,
     refsTotal: 2,
-    advisors: [
+    agents: [
       { label: 'Alpha', status: 'done' },
       { label: 'Beta', status: 'running' }
     ],
@@ -487,7 +487,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   }
   const interrupted = applyComplete(partial, { status: 'error' })
   assert.equal(interrupted.open, true)
-  assert.deepEqual(plain(interrupted.advisors), [
+  assert.deepEqual(plain(interrupted.agents), [
     { label: 'Alpha', status: 'done' },
     { label: 'Beta', status: 'interrupted' }
   ])
@@ -500,7 +500,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     open: true,
     refsDone: 2,
     refsTotal: 2,
-    advisors: [
+    agents: [
       { label: 'Alpha', status: 'done' },
       { label: 'Beta', status: 'done' }
     ],
@@ -508,7 +508,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     aggregatorState: 'aggregating'
   }, {})
   assert.equal(complete.open, true)
-  assert.deepEqual(plain(complete.advisors), [
+  assert.deepEqual(plain(complete.agents), [
     { label: 'Alpha', status: 'done' },
     { label: 'Beta', status: 'done' }
   ])
@@ -521,7 +521,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'session-1',
     refsDone: 0,
     refsTotal: 0,
-    advisors: [],
+    agents: [],
     aggregator: '',
     aggregatorState: 'waiting'
   }, {})
@@ -529,8 +529,8 @@ const offMetrics = { status: 'off', current: null, history: [] }
 }
 
 {
-  const stickyMoA = { open: true, refsDone: 2, refsTotal: 2, advisors: [], aggregator: 'Synthesizer', aggregatorState: 'done' }
-  const focusedMoA = { open: true, refsDone: 1, refsTotal: 2, advisors: [], aggregator: '', aggregatorState: 'waiting' }
+  const stickyMoA = { open: true, refsDone: 2, refsTotal: 2, agents: [], aggregator: 'Synthesizer', aggregatorState: 'done' }
+  const focusedMoA = { open: true, refsDone: 1, refsTotal: 2, agents: [], aggregator: '', aggregatorState: 'waiting' }
   const state = {
     focusedId: 'last-moa',
     runsBySession: { 'last-moa': stickyMoA, 'focused-moa': focusedMoA }
@@ -540,7 +540,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.equal(chipCaption(selectedRun(state, 'grok-tab', 'active-tab')), 'MoA 0/0')
   assert.equal(liveBoardRun(state, 'focused-moa', 'active-tab'), focusedMoA)
 
-  const openHostRun = { open: true, refsDone: 0, refsTotal: 0, advisors: [], aggregator: '', aggregatorState: 'waiting' }
+  const openHostRun = { open: true, refsDone: 0, refsTotal: 0, agents: [], aggregator: '', aggregatorState: 'waiting' }
   const stickyHostState = {
     focusedId: 'last-moa',
     runsBySession: { 'last-moa': stickyMoA, 'host-grok': openHostRun }
@@ -554,11 +554,11 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.equal(tooltipLabel({
     refsDone: 1,
     refsTotal: 2,
-    advisors: [{ label: 'Alpha', status: 'done' }, { label: '', status: 'running' }],
+    agents: [{ label: 'Alpha', status: 'done' }, { label: '', status: 'running' }],
     aggregator: 'Synthesizer',
     aggregatorState: 'aggregating'
   }), 'Alpha: done\nAgent 2: running\nSynthesizer: aggregating')
-  assert.equal(tooltipLabel({ refsDone: 0, refsTotal: 2, advisors: [], aggregator: '', aggregatorState: 'waiting' }), 'MoA 0/2')
+  assert.equal(tooltipLabel({ refsDone: 0, refsTotal: 2, agents: [], aggregator: '', aggregatorState: 'waiting' }), 'MoA 0/2')
 }
 
 {
@@ -566,7 +566,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     open: true,
     refsDone: 1,
     refsTotal: 2,
-    advisors: [{ label: 'Alpha', status: 'done' }, { label: '', status: 'running' }],
+    agents: [{ label: 'Alpha', status: 'done' }, { label: '', status: 'running' }],
     aggregator: 'Synthesizer',
     aggregatorState: 'aggregating'
   }
@@ -663,7 +663,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         open: true,
         refsDone: 1,
         refsTotal: 1,
-        advisors: [{ label: 'Advisor', status: 'done' }],
+        agents: [{ label: 'Advisor', status: 'done' }],
         aggregator: 'Aggregator',
         aggregatorState: 'done'
       }
@@ -699,7 +699,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         open: true,
         refsDone: 0,
         refsTotal: 1,
-        advisors: [],
+        agents: [],
         aggregator: '',
         aggregatorState: 'waiting'
       }
@@ -713,7 +713,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     previousRing: [{
       sessionId: 'sticky-moa',
       presetName: 'Previous Preset',
-      advisors: [{ label: 'openai:gpt-advisor', status: 'done' }],
+      agents: [{ label: 'openai:gpt-advisor', status: 'done' }],
       aggregator: 'xai:grok-aggregator[reasoning=high]',
       aggregatorState: 'done',
       refsDone: 1,
@@ -726,7 +726,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         presetName: 'Live Preset',
         refsDone: 1,
         refsTotal: 1,
-        advisors: [{ label: 'Alpha', status: 'done' }],
+        agents: [{ label: 'Alpha', status: 'done' }],
         aggregator: 'Synthesizer',
         aggregatorState: 'done',
         previous: []
@@ -764,7 +764,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.ok(grokStickyText.includes('Previous MoA boards'))
   assert.ok(grokStickyText.includes('2k in / 500 out'))
   assert.equal(chipCaption(selectedRun(trackerState.get(), 'grok-tab', 'active-tab')), 'MoA 0/0')
-  assert.deepEqual(plain(textContent(AdvisorRow({ advisor: { label: 'xai:grok-advisor[reasoning=high]', status: 'done' }, index: 0 }))), ['Agent: grok-advisor[reasoning=high]', 'done'])
+  assert.deepEqual(plain(textContent(AgentRow({ agent: { label: 'xai:grok-advisor[reasoning=high]', status: 'done' }, index: 0 }))), ['Agent: grok-advisor[reasoning=high]', 'done'])
   assert.deepEqual(plain(textContent(AggregatorRow({ run: { aggregator: 'xai:grok-aggregator', aggregatorState: 'done' } }))), ['Aggregator: grok-aggregator', 'done'])
   assert.deepEqual(plain(textContent(AggregatorRow({ run: { aggregator: '', aggregatorState: 'waiting' } }))), ['Aggregator: Aggregator', 'waiting'])
   sandbox.queryResult = {}
@@ -772,7 +772,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     previousRing: Array.from({ length: 6 }, (_, index) => ({
       sessionId: 'previous-session',
       presetName: index === 0 ? 'Previous Preset' : '',
-      advisors: [{ label: index === 0 ? 'openai:gpt-advisor' : '', status: 'done' }],
+      agents: [{ label: index === 0 ? 'openai:gpt-advisor' : '', status: 'done' }],
       aggregator: 'xai:grok-aggregator[reasoning=high]',
       aggregatorState: 'done',
       refsDone: 1,
@@ -811,7 +811,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
       sessionId: 'history-fallback',
       turnId: 'not-a-unique-match',
       presetName: 'History fallback',
-      advisors: [],
+      agents: [],
       aggregator: 'Synthesizer',
       aggregatorState: 'done',
       refsDone: 1,
@@ -845,7 +845,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     focusedId: 'focused-s1',
     previousRing: [{
       sessionId: 'focused-s1',
-      advisors: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'done' }],
+      agents: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'done' }],
       aggregator: 'Synthesizer',
       aggregatorState: 'done',
       refsDone: 2,
@@ -936,7 +936,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         open: true,
         refsDone: 1,
         refsTotal: 1,
-        advisors: [{ label: 'Advisor', status: 'done' }],
+        agents: [{ label: 'Advisor', status: 'done' }],
         aggregator: 'Aggregator',
         aggregatorState: 'done'
       }
@@ -972,7 +972,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
         open: true,
         refsDone: 1,
         refsTotal: 2,
-        advisors: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'running' }],
+        agents: [{ label: 'Alpha', status: 'done' }, { label: 'Beta', status: 'running' }],
         aggregator: 'Synthesizer',
         aggregatorState: 'aggregating'
       }
@@ -1029,11 +1029,11 @@ const offMetrics = { status: 'off', current: null, history: [] }
         open: true,
         refsDone: 1,
         refsTotal: 1,
-        advisors: [{ label: 'xai:grok-advisor', status: 'done' }],
+        agents: [{ label: 'xai:grok-advisor', status: 'done' }],
         aggregator: 'xai:grok-aggregator[reasoning=high]',
         aggregatorState: 'done',
         previous: Array.from({ length: 6 }, (_, index) => ({
-          advisors: [{ label: index === 0 ? 'openai:gpt-advisor' : '', status: 'done' }],
+          agents: [{ label: index === 0 ? 'openai:gpt-advisor' : '', status: 'done' }],
           aggregator: 'openai:gpt-aggregator',
           aggregatorState: 'done',
           refsDone: 1,
@@ -1143,7 +1143,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.equal(replacement.presetName, 'Identity preset')
   assert.equal(replacement.turnId, 'turn-one')
   assert.deepEqual(plain(snapshotRun(progressed)), {
-    advisors: plain(progressed.advisors),
+    agents: plain(progressed.agents),
     aggregator: '',
     aggregatorState: 'waiting',
     refsDone: 1,
@@ -1170,7 +1170,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'moa-s',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Advisor', status: 'done' }],
+    agents: [{ label: 'Advisor', status: 'done' }],
     aggregator: 'Aggregator',
     aggregatorState: 'done'
   }
@@ -1186,7 +1186,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'moa-s',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Advisor', status: 'done' }],
+    agents: [{ label: 'Advisor', status: 'done' }],
     aggregator: 'Aggregator',
     aggregatorState: 'done'
   }
@@ -1208,7 +1208,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'moa-next',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Advisor', status: 'done' }],
+    agents: [{ label: 'Advisor', status: 'done' }],
     aggregator: 'Aggregator',
     aggregatorState: 'done'
   }
@@ -1241,8 +1241,8 @@ const offMetrics = { status: 'off', current: null, history: [] }
 
 {
   const ring = [
-    { sessionId: 'ring-s-1', turnId: 'ring-t-1', refsDone: 1, refsTotal: 1, advisors: [], aggregator: '' },
-    { sessionId: 'ring-s-2', turnId: 'ring-t-2', refsDone: 1, refsTotal: 1, advisors: [], aggregator: '' }
+    { sessionId: 'ring-s-1', turnId: 'ring-t-1', refsDone: 1, refsTotal: 1, agents: [], aggregator: '' },
+    { sessionId: 'ring-s-2', turnId: 'ring-t-2', refsDone: 1, refsTotal: 1, agents: [], aggregator: '' }
   ]
   const history = [
     { session_id: 'ring-s-1', turn_id: 'ring-t-1', model: 'Duplicate ring row', references: [{ usage: { input_tokens: 100, output_tokens: 10 } }] },
@@ -1306,7 +1306,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
 }
 
 {
-  const ring = [{ sessionId: 'history-session', turnId: 'history-turn', refsDone: 1, refsTotal: 1, advisors: [], aggregator: '' }]
+  const ring = [{ sessionId: 'history-session', turnId: 'history-turn', refsDone: 1, refsTotal: 1, agents: [], aggregator: '' }]
   const pane = PreviousRuns({
     previousRing: ring,
     metrics: {
@@ -1345,7 +1345,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     sessionId: 'moa-other-session',
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Advisor', status: 'done' }],
+    agents: [{ label: 'Advisor', status: 'done' }],
     aggregator: 'Aggregator',
     aggregatorState: 'done'
   }
@@ -1362,7 +1362,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     open: true,
     refsDone: 1,
     refsTotal: 1,
-    advisors: [{ label: 'Advisor', status: 'done' }],
+    agents: [{ label: 'Advisor', status: 'done' }],
     aggregator: 'Aggregator',
     aggregatorState: 'done',
     presetName: 'Sticky MoA'

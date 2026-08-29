@@ -17,7 +17,7 @@ function emptyRun(sessionId, previous = []) {
     turnId: '',
     refsDone: 0,
     refsTotal: 0,
-    advisors: [],
+    agents: [],
     aggregator: '',
     aggregatorState: 'waiting',
     previous
@@ -37,8 +37,8 @@ function clampRefs(value, fallback = 0) {
   return Math.max(0, Math.min(MAX_REFS, Math.trunc(numeric)))
 }
 
-function padWaiting(advisors, total) {
-  const next = advisors.slice(0, MAX_REFS)
+function padWaiting(agents, total) {
+  const next = agents.slice(0, MAX_REFS)
   const cappedTotal = clampRefs(total)
   while (next.length < cappedTotal) next.push({ label: '', status: 'waiting' })
   return next
@@ -293,19 +293,19 @@ async function fetchMetrics(rest, sessionId) {
   }
 }
 
-function promoteFirstWaiting(advisors, refsDone, refsTotal) {
-  if (refsDone >= refsTotal) return advisors
-  const index = advisors.findIndex((advisor) => advisor.status === 'waiting')
-  if (index < 0) return advisors
-  const next = advisors.slice()
+function promoteFirstWaiting(agents, refsDone, refsTotal) {
+  if (refsDone >= refsTotal) return agents
+  const index = agents.findIndex((agent) => agent.status === 'waiting')
+  if (index < 0) return agents
+  const next = agents.slice()
   next[index] = { ...next[index], status: 'running' }
   return next
 }
 
 function tooltipLabel(run) {
-  if (!run.advisors.length) return `MoA ${run.refsDone}/${run.refsTotal}`
-  const advisors = run.advisors.map((advisor, index) => `${displayModelLabel(advisor.label) || `Agent ${index + 1}`}: ${advisor.status}`)
-  return [...advisors, `${displayModelLabel(run.aggregator) || 'Aggregator'}: ${run.aggregatorState}`].join('\n')
+  if (!run.agents.length) return `MoA ${run.refsDone}/${run.refsTotal}`
+  const agents = run.agents.map((agent, index) => `${displayModelLabel(agent.label) || `Agent ${index + 1}`}: ${agent.status}`)
+  return [...agents, `${displayModelLabel(run.aggregator) || 'Aggregator'}: ${run.aggregatorState}`].join('\n')
 }
 
 function chipCaption(run) {
@@ -330,11 +330,11 @@ function replaceRun(sessionId, update) {
   })
 }
 
-function setAdvisorStatus(advisors, label, status) {
-  const next = advisors.slice()
-  const namedIndex = label ? next.findIndex((advisor) => advisor.label === label) : -1
-  const runningIndex = next.findIndex((advisor) => !advisor.label && advisor.status === 'running')
-  const waitingIndex = next.findIndex((advisor) => advisor.status === 'waiting')
+function setAgentStatus(agents, label, status) {
+  const next = agents.slice()
+  const namedIndex = label ? next.findIndex((agent) => agent.label === label) : -1
+  const runningIndex = next.findIndex((agent) => !agent.label && agent.status === 'running')
+  const waitingIndex = next.findIndex((agent) => agent.status === 'waiting')
   const index = namedIndex >= 0 ? namedIndex : runningIndex >= 0 ? runningIndex : waitingIndex
   if (index >= 0) {
     next[index] = { label: label || next[index].label, status }
@@ -349,11 +349,11 @@ function applyProgress(run, payload) {
   const current = isNewFanout
     ? { ...emptyRun(run.sessionId, run.previous || []), presetName: run.presetName, turnId: run.turnId }
     : run
-  let advisors = current.advisors
-  advisors = padWaiting(advisors, refsTotal)
-  advisors = setAdvisorStatus(advisors, typeof payload.label === 'string' ? payload.label : '', 'done')
-  advisors = promoteFirstWaiting(advisors, refsDone, refsTotal)
-  return { ...current, ...copyRunIdentity(current, payload), open: true, refsDone, refsTotal, advisors }
+  let agents = current.agents
+  agents = padWaiting(agents, refsTotal)
+  agents = setAgentStatus(agents, typeof payload.label === 'string' ? payload.label : '', 'done')
+  agents = promoteFirstWaiting(agents, refsDone, refsTotal)
+  return { ...current, ...copyRunIdentity(current, payload), open: true, refsDone, refsTotal, agents }
 }
 
 function onProgress(event) {
@@ -368,16 +368,16 @@ function onReference(event) {
   if (typeof payload.text !== 'string' || !payload.text.startsWith('[failed:')) return
   replaceRun(sessionId, (run) => {
     const refsTotal = clampRefs(run.refsTotal || payload.count, run.refsTotal)
-    let advisors = padWaiting(run.advisors, refsTotal)
+    let agents = padWaiting(run.agents, refsTotal)
     const label = typeof payload.label === 'string' ? payload.label : ''
     if (label) {
-      advisors = setAdvisorStatus(advisors, label, 'failed')
-    } else if (typeof payload.index === 'number' && payload.index >= 0 && payload.index < advisors.length) {
-      advisors[payload.index] = { ...advisors[payload.index], status: 'failed' }
+      agents = setAgentStatus(agents, label, 'failed')
+    } else if (typeof payload.index === 'number' && payload.index >= 0 && payload.index < agents.length) {
+      agents[payload.index] = { ...agents[payload.index], status: 'failed' }
     } else {
-      advisors = setAdvisorStatus(advisors, '', 'failed')
+      agents = setAgentStatus(agents, '', 'failed')
     }
-    return { ...run, open: true, refsTotal, advisors }
+    return { ...run, open: true, refsTotal, agents }
   })
 }
 
@@ -408,13 +408,13 @@ function onAggregating(event) {
 
 function runWasMoA(run) {
   return Boolean(run?.open) && (
-    run.advisors.length > 0 || run.refsTotal > 0 || Boolean(run.aggregator)
+    run.agents.length > 0 || run.refsTotal > 0 || Boolean(run.aggregator)
   )
 }
 
 function snapshotRun(run) {
   return {
-    advisors: run.advisors,
+    agents: run.agents,
     aggregator: run.aggregator,
     aggregatorState: run.aggregatorState,
     refsDone: run.refsDone,
@@ -450,17 +450,17 @@ function onMessageStart(event) {
 }
 
 function applyComplete(run, payload) {
-  if (!run.open && run.refsTotal === 0 && run.advisors.length === 0 && !run.aggregator) return run
+  if (!run.open && run.refsTotal === 0 && run.agents.length === 0 && !run.aggregator) return run
   const refsIncomplete = run.refsDone < run.refsTotal
   const interrupted = payload.status === 'error' || refsIncomplete
   if (interrupted) {
     return {
       ...run,
       open: true,
-      advisors: run.advisors.map((advisor) => (
-        advisor.status === 'waiting' || advisor.status === 'running'
-          ? { ...advisor, status: 'interrupted' }
-          : advisor
+      agents: run.agents.map((agent) => (
+        agent.status === 'waiting' || agent.status === 'running'
+          ? { ...agent, status: 'interrupted' }
+          : agent
       )),
       aggregatorState: run.aggregatorState === 'waiting' || run.aggregatorState === 'aggregating'
         ? 'interrupted'
@@ -485,9 +485,9 @@ function onSessionInfo(event) {
   const payload = (event && event.payload) || {}
   if (payload.running !== false) return
   replaceRun(sessionId, (run) => {
-    const hasPendingAdvisor = run.advisors.some((advisor) => advisor.status === 'waiting' || advisor.status === 'running')
+    const hasPendingAgent = run.agents.some((agent) => agent.status === 'waiting' || agent.status === 'running')
     const aggregatorPending = run.aggregatorState === 'waiting' || run.aggregatorState === 'aggregating'
-    if (!run.open || (!hasPendingAdvisor && !aggregatorPending)) return run
+    if (!run.open || (!hasPendingAgent && !aggregatorPending)) return run
     return applyComplete(run, { status: 'error' })
   })
 }
@@ -523,7 +523,7 @@ function statusClassName(status) {
   return status === 'done' ? 'text-emerald-500/80' : undefined
 }
 
-const advisorLineStyle = {
+const agentLineStyle = {
   display: '-webkit-box',
   WebkitLineClamp: 3,
   WebkitBoxOrient: 'vertical',
@@ -534,13 +534,13 @@ const advisorLineStyle = {
   color: 'var(--ui-text-tertiary)'
 }
 
-function AdvisorRow({ advisor, index }) {
-  const label = displayModelLabel(advisor.label) || `Agent ${index + 1}`
+function AgentRow({ agent, index }) {
+  const label = displayModelLabel(agent.label) || `Agent ${index + 1}`
   return jsxs('div', {
     style: { display: 'flex', justifyContent: 'space-between', gap: '12px', padding: '7px 0', borderBottom: '1px solid var(--ui-stroke-secondary)' },
     children: [
       jsx('span', { style: { color: 'var(--ui-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: `Agent: ${label}` }),
-      jsx('span', { className: statusClassName(advisor.status), style: statusStyle(advisor.status), children: advisor.status })
+      jsx('span', { className: statusClassName(agent.status), style: statusStyle(agent.status), children: agent.status })
     ]
   })
 }
@@ -568,11 +568,11 @@ function PreviousRuns({ previousRing, metrics, liveRun }) {
         const name = fromHistory
           ? displayMoaName(previousRun)
           : displayMoaName({ presetName: previousRun?.presetName, model: usage?.model })
-        const advisors = (fromHistory
+        const agents = (fromHistory
           ? previousRun.references
-          : (Array.isArray(previousRun?.advisors) ? previousRun.advisors : [])
+          : (Array.isArray(previousRun?.agents) ? previousRun.agents : [])
         )
-          .map((advisor, advisorIndex) => displayModelLabel(advisor?.model || advisor?.label) || `Agent ${advisorIndex + 1}`)
+          .map((agent, agentIndex) => displayModelLabel(agent?.model || agent?.label) || `Agent ${agentIndex + 1}`)
           .join(' · ')
         const lastReference = fromHistory && Array.isArray(previousRun?.references)
           ? previousRun.references[previousRun.references.length - 1]
@@ -586,7 +586,7 @@ function PreviousRuns({ previousRing, metrics, liveRun }) {
           style: { borderTop: '1px solid var(--ui-stroke-secondary)', padding: '7px 0' },
           children: [
             jsx('div', { style: { color: 'var(--ui-text-secondary)', fontSize: '12px' }, children: fromHistory ? `${name ? `MoA: ${name}` : 'MoA'}${fanouts ? ` · ${fanouts}` : ''}` : (name ? `MoA: ${name} ${previousRun.refsDone}/${previousRun.refsTotal}` : `MoA ${previousRun.refsDone}/${previousRun.refsTotal}`) }),
-            advisors ? jsx('div', { style: advisorLineStyle, children: `Agent: ${advisors}` }) : null,
+            agents ? jsx('div', { style: agentLineStyle, children: `Agent: ${agents}` }) : null,
             aggregator ? jsx('div', { className: statusClassName(aggregatorState), style: statusStyle(aggregatorState), children: `Aggregator: ${aggregator}${aggregatorState ? `: ${aggregatorState}` : ''}` }) : null,
             usage ? jsx('div', { style: { color: 'var(--ui-text-quaternary)', fontSize: '12px' }, children: formatRunTotals(usage) }) : null
           ]
@@ -649,7 +649,7 @@ function TrackerPane({ rest }) {
       ]
     })
   }
-  const rows = run.advisors.map((advisor, index) => jsx(AdvisorRow, { advisor, index }, `${advisor.label}:${index}`))
+  const rows = run.agents.map((agent, index) => jsx(AgentRow, { agent, index }, `${agent.label}:${index}`))
   return jsxs('div', {
     style: { padding: '14px', color: 'var(--ui-text-secondary)' },
     children: [
