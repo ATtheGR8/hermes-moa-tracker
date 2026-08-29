@@ -557,7 +557,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     advisors: [{ label: 'Alpha', status: 'done' }, { label: '', status: 'running' }],
     aggregator: 'Synthesizer',
     aggregatorState: 'aggregating'
-  }), 'Alpha: done\nAdvisor 2: running\nSynthesizer: aggregating')
+  }), 'Alpha: done\nAgent 2: running\nSynthesizer: aggregating')
   assert.equal(tooltipLabel({ refsDone: 0, refsTotal: 2, advisors: [], aggregator: '', aggregatorState: 'waiting' }), 'MoA 0/2')
 }
 
@@ -575,7 +575,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.equal(chipCaption({ ...openRun, open: false }), 'MoA 0/0')
   assert.equal(chipTip({ ...openRun, open: false }), 'MoA 0/0')
   assert.equal(chipCaption(openRun), 'MoA 1/2')
-  assert.equal(chipTip(openRun), 'Alpha: done\nAdvisor 2: running\nSynthesizer: aggregating')
+  assert.equal(chipTip(openRun), 'Alpha: done\nAgent 2: running\nSynthesizer: aggregating')
 }
 
 {
@@ -717,7 +717,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   })
   const stickyPaneText = textContent(TrackerPane({ rest: queryRest }))
   assert.deepEqual(plain(sandbox.lastQuery.queryKey), ['moa-tracker', 'metrics', 'sticky-moa'])
-  assert.ok(stickyPaneText.includes('Mixture of Advisors · Live Preset'))
+  assert.ok(stickyPaneText.includes('Mixture of Agents · Live Preset'))
   assert.ok(stickyPaneText.includes('refs completed 1/1'))
   assert.ok(!stickyPaneText.includes('Waiting for MoA activity in this session.'))
   const stickyRequests = []
@@ -746,7 +746,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.ok(grokStickyText.includes('Previous MoA boards'))
   assert.ok(grokStickyText.includes('2k in / 500 out'))
   assert.equal(chipCaption(selectedRun(trackerState.get(), 'grok-tab', 'active-tab')), 'MoA 0/0')
-  assert.deepEqual(plain(textContent(AdvisorRow({ advisor: { label: 'xai:grok-advisor[reasoning=high]', status: 'done' }, index: 0 }))), ['Advisor: grok-advisor[reasoning=high]', 'done'])
+  assert.deepEqual(plain(textContent(AdvisorRow({ advisor: { label: 'xai:grok-advisor[reasoning=high]', status: 'done' }, index: 0 }))), ['Agent: grok-advisor[reasoning=high]', 'done'])
   assert.deepEqual(plain(textContent(AggregatorRow({ run: { aggregator: 'xai:grok-aggregator', aggregatorState: 'done' } }))), ['Aggregator: grok-aggregator', 'done'])
   assert.deepEqual(plain(textContent(AggregatorRow({ run: { aggregator: '', aggregatorState: 'waiting' } }))), ['Aggregator: Aggregator', 'waiting'])
   sandbox.queryResult = {}
@@ -781,8 +781,8 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.ok(previousText.includes('Previous MoA boards'))
   assert.equal(previousText.filter((text) => text === 'MoA').length, 2, 'JSONL cards render before and instead of unmatched ring cards')
   assert.ok(!previousText.includes('MoA: Previous Preset 1/1'))
-  assert.ok(!previousText.includes('Advisor: gpt-advisor'))
-  assert.ok(previousText.includes('Advisor: Advisor 1'))
+  assert.ok(!previousText.includes('Agent: gpt-advisor'))
+  assert.ok(previousText.includes('Agent: Agent 1'))
   assert.ok(!previousText.includes('Aggregator: grok-aggregator[reasoning=high]: done'))
   assert.ok(previousText.includes('2k in / 500 out'))
   assert.ok(previousText.includes('100 in / 0 out'))
@@ -932,8 +932,8 @@ const offMetrics = { status: 'off', current: null, history: [] }
     }
   }
   const chromeFallbackText = textContent(TrackerPane({ rest: () => [] }))
-  assert.ok(chromeFallbackText.some((text) => text.includes('Mixture of Advisors')))
-  assert.ok(!chromeFallbackText.includes('Mixture of Advisors · Borrowed model'), 'RED prior-turn usage never retitles Live chrome from the fallback model')
+  assert.ok(chromeFallbackText.some((text) => text.includes('Mixture of Agents')))
+  assert.ok(!chromeFallbackText.includes('Mixture of Agents · Borrowed model'), 'RED prior-turn usage never retitles Live chrome from the fallback model')
   assert.ok(chromeFallbackText.includes('1.8k in / 600 out · prior turn'))
 
   trackerState.set({
@@ -943,7 +943,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
     }
   })
   const namedChromeFallbackText = textContent(TrackerPane({ rest: () => [] }))
-  assert.ok(namedChromeFallbackText.includes('Mixture of Advisors · Chrome Preset'), 'RED prior-turn usage preserves the Live board preset')
+  assert.ok(namedChromeFallbackText.includes('Mixture of Agents · Chrome Preset'), 'RED prior-turn usage preserves the Live board preset')
 
   trackerState.set({
     focusedId: 'partial-live',
@@ -1031,7 +1031,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   assert.ok(!metricsText.includes('current 12.4k in / 3.1k out · $0.12'))
   assert.ok(metricsText.includes('Alpha  4.2k→1.1k  $0.04'))
   assert.ok(metricsText.includes('MoA: m0'))
-  assert.ok(metricsText.includes('Advisor: m0-advisor'))
+  assert.ok(metricsText.includes('Agent: m0-advisor'))
   assert.equal(metricsText.filter((text) => text.endsWith('1k in / 2k out · $0.01')).length, 10, 'Previous caps JSONL-seeded rows at ten')
   assert.ok(!metricsText.includes('previous 1k in / 2k out · $0.01'))
   assert.ok(metricsText.some((text) => text.startsWith('MoA: m9')), 'Previous includes the tenth JSONL row')
@@ -1370,7 +1370,7 @@ const offMetrics = { status: 'off', current: null, history: [] }
   const text = textContent(pane)
   assert.equal(sandbox.lastQuery.queryKey[2], 'grok-tab', 'Live /current stays attached to the host-focused ID when sticky chrome has no stored sessionId')
   assert.ok(!text.includes('7.1k in / 234 out'), 'Live board does not attach totals through trackerState.focusedId')
-  assert.ok(text.includes('Mixture of Advisors · Sticky MoA'), 'Live board remains the sticky MoA board, not only Previous')
+  assert.ok(text.includes('Mixture of Agents · Sticky MoA'), 'Live board remains the sticky MoA board, not only Previous')
   assert.equal(chipCaption(selectedRun(trackerState.get(), 'grok-tab', 'active-s1')), 'MoA 0/0', 'Grok-tab chip stays host-focused')
   sandbox.focusedSessionId = ''
 }

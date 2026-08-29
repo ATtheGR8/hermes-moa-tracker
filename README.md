@@ -1,6 +1,6 @@
 # MoA Tracker
 
-MoA Tracker is a **Hermes Agent** Desktop plugin that shows a live, in-memory board for Mixture-of-Agents (MoA) runs: labelled advisor and aggregator rows, status (waiting / running / aggregating / done / failed / interrupted), a focused-session status chip, leftover sticky chrome with in/out when `/history` has a matching `turn_id`, and Previous MoA boards fed from sanitized metrics. The live board is driven by session events and does not require a backend; an optional Python metrics hook adds `/current` and `/history` (until that hook is loaded, the UI shows **metrics backend off**). The plugin does not persist advisor content or request snapshots, does not change gateway or core configuration, and is not an official Nous Research product.
+MoA Tracker is a **Hermes Agent** Desktop plugin that shows a live, in-memory board for Mixture-of-Agents (MoA) runs: labelled agent and aggregator rows, status (waiting / running / aggregating / done / failed / interrupted), a focused-session status chip, leftover sticky chrome with in/out when `/history` has a matching `turn_id`, and Previous MoA boards fed from sanitized metrics. The live board is driven by session events and does not require a backend; an optional Python metrics hook adds `/current` and `/history` (until that hook is loaded, the UI shows **metrics backend off**). The plugin does not persist advisor content or request snapshots, does not change gateway or core configuration, and is not an official Nous Research product.
 
 ## Install
 
@@ -42,7 +42,7 @@ This plugin has no extra Settings knobs. Copy this repository into your Hermes p
 
 ## Behavior
 
-**Live board.** The title is **Mixture of Advisors**, with the MoA preset name when known. Advisor and aggregator rows are labelled. Status uses waiting / running / aggregating / done / failed / interrupted.
+**Live board.** The title is **Mixture of Agents**, with the MoA preset name when known. Agent and aggregator rows are labelled. Status uses waiting / running / aggregating / done / failed / interrupted.
 
 **Sticky board vs chip.** The live board sticks to the last in-memory MoA run when you switch tabs. The status chip follows the **focused** session (`MoA 0/0` on a non-MoA tab).
 

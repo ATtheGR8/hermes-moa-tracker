@@ -304,7 +304,7 @@ function promoteFirstWaiting(advisors, refsDone, refsTotal) {
 
 function tooltipLabel(run) {
   if (!run.advisors.length) return `MoA ${run.refsDone}/${run.refsTotal}`
-  const advisors = run.advisors.map((advisor, index) => `${displayModelLabel(advisor.label) || `Advisor ${index + 1}`}: ${advisor.status}`)
+  const advisors = run.advisors.map((advisor, index) => `${displayModelLabel(advisor.label) || `Agent ${index + 1}`}: ${advisor.status}`)
   return [...advisors, `${displayModelLabel(run.aggregator) || 'Aggregator'}: ${run.aggregatorState}`].join('\n')
 }
 
@@ -535,11 +535,11 @@ const advisorLineStyle = {
 }
 
 function AdvisorRow({ advisor, index }) {
-  const label = displayModelLabel(advisor.label) || `Advisor ${index + 1}`
+  const label = displayModelLabel(advisor.label) || `Agent ${index + 1}`
   return jsxs('div', {
     style: { display: 'flex', justifyContent: 'space-between', gap: '12px', padding: '7px 0', borderBottom: '1px solid var(--ui-stroke-secondary)' },
     children: [
-      jsx('span', { style: { color: 'var(--ui-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: `Advisor: ${label}` }),
+      jsx('span', { style: { color: 'var(--ui-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }, children: `Agent: ${label}` }),
       jsx('span', { className: statusClassName(advisor.status), style: statusStyle(advisor.status), children: advisor.status })
     ]
   })
@@ -572,7 +572,7 @@ function PreviousRuns({ previousRing, metrics, liveRun }) {
           ? previousRun.references
           : (Array.isArray(previousRun?.advisors) ? previousRun.advisors : [])
         )
-          .map((advisor, advisorIndex) => displayModelLabel(advisor?.model || advisor?.label) || `Advisor ${advisorIndex + 1}`)
+          .map((advisor, advisorIndex) => displayModelLabel(advisor?.model || advisor?.label) || `Agent ${advisorIndex + 1}`)
           .join(' · ')
         const lastReference = fromHistory && Array.isArray(previousRun?.references)
           ? previousRun.references[previousRun.references.length - 1]
@@ -586,7 +586,7 @@ function PreviousRuns({ previousRing, metrics, liveRun }) {
           style: { borderTop: '1px solid var(--ui-stroke-secondary)', padding: '7px 0' },
           children: [
             jsx('div', { style: { color: 'var(--ui-text-secondary)', fontSize: '12px' }, children: fromHistory ? `${name ? `MoA: ${name}` : 'MoA'}${fanouts ? ` · ${fanouts}` : ''}` : (name ? `MoA: ${name} ${previousRun.refsDone}/${previousRun.refsTotal}` : `MoA ${previousRun.refsDone}/${previousRun.refsTotal}`) }),
-            advisors ? jsx('div', { style: advisorLineStyle, children: `Advisor: ${advisors}` }) : null,
+            advisors ? jsx('div', { style: advisorLineStyle, children: `Agent: ${advisors}` }) : null,
             aggregator ? jsx('div', { className: statusClassName(aggregatorState), style: statusStyle(aggregatorState), children: `Aggregator: ${aggregator}${aggregatorState ? `: ${aggregatorState}` : ''}` }) : null,
             usage ? jsx('div', { style: { color: 'var(--ui-text-quaternary)', fontSize: '12px' }, children: formatRunTotals(usage) }) : null
           ]
@@ -653,7 +653,7 @@ function TrackerPane({ rest }) {
   return jsxs('div', {
     style: { padding: '14px', color: 'var(--ui-text-secondary)' },
     children: [
-      jsx('div', { style: { color: 'var(--ui-text-secondary)', fontWeight: '600', marginBottom: '5px' }, children: liveName ? `Mixture of Advisors · ${liveName}` : 'Mixture of Advisors' }),
+      jsx('div', { style: { color: 'var(--ui-text-secondary)', fontWeight: '600', marginBottom: '5px' }, children: liveName ? `Mixture of Agents · ${liveName}` : 'Mixture of Agents' }),
       jsx('div', { style: { color: 'var(--ui-text-tertiary)', fontSize: '12px', marginBottom: '10px' }, children: `refs completed ${run.refsDone}/${run.refsTotal}` }),
       rows.length ? jsx('div', { children: rows }) : jsx('div', { style: { color: 'var(--ui-text-quaternary)', padding: '7px 0' }, children: 'No advisor references yet.' }),
       jsx(AggregatorRow, { run }),
