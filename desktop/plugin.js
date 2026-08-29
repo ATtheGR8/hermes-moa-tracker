@@ -146,7 +146,7 @@ function previousRingUsage(previousRing, metrics, liveRun) {
 
 function formatRefRow(reference) {
   const usage = reference && typeof reference === 'object' ? reference.usage : null
-  const label = typeof reference?.label === 'string' && reference.label ? reference.label : 'advisor'
+  const label = typeof reference?.label === 'string' && reference.label ? reference.label : 'agent'
   const totals = `${formatTokenCount(usage?.input_tokens)}→${formatTokenCount(usage?.output_tokens)}`
   const cost = formatCost(reference?.cost_usd)
   return cost ? `${label}  ${totals}  ${cost}` : `${label}  ${totals}`
@@ -729,7 +729,7 @@ export default {
       data: {
         id: 'moa-tracker.open',
         label: 'MoA: Open tracker',
-        keywords: ['moa', 'mixture', 'advisors'],
+        keywords: ['moa', 'mixture', 'agents'],
         run: () => host.navigate('/moa-tracker')
       }
     })

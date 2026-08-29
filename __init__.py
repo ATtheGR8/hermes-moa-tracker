@@ -19,7 +19,7 @@ def _payload(args, kwargs):
 
 
 def handler(*args, **kwargs):
-    """Persist only sanitized MoA advisor metrics and never affect requests."""
+    """Persist only sanitized MoA agent metrics and never affect requests."""
     try:
         from hermes_constants import get_hermes_home
 

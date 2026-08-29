@@ -1,6 +1,6 @@
 # Security
 
-MoA Tracker stores only sanitized advisor metrics (no reference bodies or prompts).
+MoA Tracker stores only sanitized agent metrics (no reference bodies or prompts).
 
 - Do not paste tokens, private keys, or session contents into issues or PRs.
 - Review the plugin before enabling it, as you would any third-party Hermes plugin.

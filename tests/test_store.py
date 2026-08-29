@@ -67,6 +67,15 @@ def test_non_moa_ignored(tmp_path):
     assert _lines(tmp_path) == []
 
 
+@pytest.mark.parametrize("reference", [
+    {"model": "missing-label", "usage": {}},
+    {"label": 42, "model": "non-string-label", "usage": {}},
+])
+def test_missing_or_non_string_reference_label_defaults_to_agent(tmp_path, reference):
+    assert apply_metrics(tmp_path, "s1", "t1", "moa", "m", [reference]) is not None
+    assert snapshot(tmp_path, "s1")["runs"][0]["references"][0]["label"] == "agent"
+
+
 @pytest.mark.parametrize("refs", [None, [], "", {}])
 def test_missing_or_empty_refs_ignored(tmp_path, refs):
     assert apply_metrics(tmp_path, "s1", "t1", "moa", "m", refs) is None

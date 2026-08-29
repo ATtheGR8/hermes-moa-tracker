@@ -96,7 +96,7 @@ const textContent = (node) => {
   assert.deepEqual(plain(sumRunUsage(run)), { input_tokens: 12400, output_tokens: 3100, cost_usd: 0.12 })
   assert.equal(formatRunTotals(run), '12.4k in / 3.1k out · $0.12')
   assert.equal(formatRefRow(run.references[0]), 'Alpha  4.2k→1.1k  $0.04')
-  assert.equal(formatRefRow({ usage: {} }), 'advisor  0→0')
+  assert.equal(formatRefRow({ usage: {} }), 'agent  0→0')
   assert.equal(formatRunTotals({ references: [] }), '0 in / 0 out')
   assert.equal(latestRun({ runs: [null, run] }), run)
   assert.equal(latestRun({ runs: [] }), null)

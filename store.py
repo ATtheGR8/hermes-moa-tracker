@@ -1,4 +1,4 @@
-"""Fail-open, sanitized persistence for MoA advisor metrics."""
+"""Fail-open, sanitized persistence for MoA agent metrics."""
 
 from __future__ import annotations
 
@@ -57,7 +57,7 @@ def _text(value: Any, default: str = "") -> str:
 
 
 def _failed(reference: Dict[str, Any]) -> bool:
-    """Treat explicit failure markers and absent usage as failed advisor slots."""
+    """Treat explicit failure markers and absent usage as failed agent slots."""
     status = _text(reference.get("status")).lower()
     return bool(reference.get("failed") or reference.get("error") or status in {"failed", "error"} or reference.get("usage") is None)
 
@@ -66,9 +66,9 @@ def _sanitize_reference(reference: Any) -> Optional[Dict[str, Any]]:
     if not isinstance(reference, dict):
         return None
     failed = _failed(reference)
-    # Deliberately construct the allow-list; advisor output and prompts never enter disk.
+    # Deliberately construct the allow-list; agent output and prompts never enter disk.
     return {
-        "label": _text(reference.get("label"), "advisor"),
+        "label": _text(reference.get("label"), "agent"),
         "model": _text(reference.get("model")),
         "provider": _text(reference.get("provider"), "moa"),
         "usage": _usage(reference.get("usage"), failed),

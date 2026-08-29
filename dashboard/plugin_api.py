@@ -1,4 +1,4 @@
-"""Read-only dashboard API for sanitized MoA advisor metrics."""
+"""Read-only dashboard API for sanitized MoA agent metrics."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ def _home():
 
 @router.get("/current")
 def current(session_id: str = ""):
-    """Return a single session's sanitized advisor metrics; never advisor text."""
+    """Return a single session's sanitized agent metrics; never agent text."""
     try:
         return load_snapshot(_home(), session_id)
     except Exception:
@@ -37,7 +37,7 @@ def current(session_id: str = ""):
 
 @router.get("/history")
 def history(limit: int = 10):
-    """Return newest-first sanitized advisor metrics; this router never listens."""
+    """Return newest-first sanitized agent metrics; this router never listens."""
     try:
         return load_history(_home(), limit)
     except Exception:

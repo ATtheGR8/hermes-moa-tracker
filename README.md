@@ -54,4 +54,4 @@ This plugin has no extra Settings knobs. Copy this repository into your Hermes p
 
 **Mid-turn.** Opened mid-turn, the live board sees later events only; it does not backfill.
 
-**Privacy.** Reference bodies are not shown or stored. A leading `[failed:` marker is used only to mark a reference failed, then the text is discarded. Public metrics JSON uses `references`, not `advisors`. When the hook is on, sanitized metrics persist only as `{home}/moa-tracker/runs.jsonl` under a supplied Hermes home — not advisor text or request snapshots. Plugin HTTP routes do not listen on their own; see [SECURITY.md](SECURITY.md).
+**Privacy.** Reference bodies are not shown or stored. A leading `[failed:` marker is used only to mark a reference failed, then the text is discarded. Public metrics JSON uses `references`, not `advisors`. When the hook is on, sanitized metrics persist only as `{home}/moa-tracker/runs.jsonl` under a supplied Hermes home — not agent text or request snapshots. Plugin HTTP routes do not listen on their own; see [SECURITY.md](SECURITY.md).
