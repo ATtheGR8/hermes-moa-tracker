@@ -1,1 +1,1 @@
-{"name":"moa-tracker","label":"MoA","description":"Sanitized MoA agent metrics","icon":"Activity","version":"1.0.0","tab":{"path":"/moa-tracker"},"api":"plugin_api.py"}
+{"name":"moa-tracker","label":"MoA","description":"Sanitized MoA agent metrics","icon":"Activity","version":"1.1.0","tab":{"path":"/moa-tracker"},"api":"plugin_api.py"}

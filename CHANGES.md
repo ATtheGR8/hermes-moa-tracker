@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Agent wording on the live board, docs, and unlabeled JSONL fallback (`label` default `agent`). JSON key remains `references`.
+- In-memory JS identifiers renamed `advisors` → `agents`.
+
 ## 1.0.0
 
 First public release of MoA Tracker.
